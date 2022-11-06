@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "d868d43b-b74c-46c8-9276-d8e1ac9a7b5f",
+		"name": "Home_work",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22384539"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"pm.environment.set(\"id\", jsonData.id)\r",
+							"\r",
+							"var code = responseCode.code;\r",
+							"switch(code) {\r",
+							"    case 201:\r",
+							"        pm.test(\"Status code is 200\", function () {\r",
+							"        });\r",
+							"\r",
+							"\r",
+							"        pm.test(\"First name check\", function () {\r",
+							"            console.log(jsonData.first_name)\r",
+							"            pm.expect(jsonData.first_name).to.eql(\"sumaiya\");\r",
+							"        });\r",
+							"        \r",
+							"        pm.test(\"Data check\" , function(){\r",
+							"            pm.expect(jsonData.date_of_birth).to.eql(\"06-05-1998\");\r",
+							"        })\r",
+							"    \r",
+							"        break;   \r",
+							" \r",
+							"    default:\r",
+							"        pm.test(\"Status code not valid or unknown\", function () {\r",
+							"        });\r",
+							"\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"first_name\": \"sumaiya\",\r\n  \"middle_name\": \"islam\",\r\n  \"last_name\": \"mim\",\r\n  \"date_of_birth\": \"06-05-1998\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/studentsDetails",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/studentsDetails",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3870016,\r\n    \"first_name\": \"sumaiya\",\r\n    \"middle_name\": \"islam\",\r\n    \"last_name\": \"mim\",\r\n    \"date_of_birth\": \"06-05-1998\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/studentsDetails/{{id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Specific student",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/studentsDetails/{{id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
